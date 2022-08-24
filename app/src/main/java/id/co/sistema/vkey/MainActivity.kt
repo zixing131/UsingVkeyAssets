@@ -10,6 +10,9 @@ import com.vkey.securefileio.SecureFileIO
 import vkey.android.vos.Vos
 import vkey.android.vos.VosWrapper
 
+/**
+ * TODO: (Bugs) When running on debug, all project working successfully. However using Run app mode, found error acquire v-os
+ * */
 class MainActivity : AppCompatActivity(), VosWrapper.Callback {
     private lateinit var mVos: Vos
     private lateinit var mStartVosThread: Thread
@@ -18,8 +21,7 @@ class MainActivity : AppCompatActivity(), VosWrapper.Callback {
     companion object {
         private const val TAG = "MainActivity"
         private const val TAG_SFIO = "SecureFileIO"
-        private const val STR_INPUT =
-            "Quick brown fox jumps over the lazy dog. 1234567890 some_one@somewhere.com"
+        private const val STR_INPUT = "Quick brown fox jumps over the lazy dog. 1234567890 some_one@somewhere.com"
         private const val PASSWORD = "P@ssw0rd"
     }
 
@@ -32,7 +34,9 @@ class MainActivity : AppCompatActivity(), VosWrapper.Callback {
         mVos = Vos(this)
         mVos.registerVosWrapperCallback(this)
 
-        startVos(this)
+        // startVos(this)
+
+        //  When running method from SFIO isVosStarted change to false
         // encryptDecryptBlockData() // Error
         // encryptDecryptStringFile() // Error
         // encryptDecryptByteFile() // Error
@@ -49,7 +53,7 @@ class MainActivity : AppCompatActivity(), VosWrapper.Callback {
     }
 
     /**
-     * TODO: STILL CONFUSING
+     * TODO: STILL CONFUSING - Crash detected signal = 11!!!
      * Because method is not yet running well
      * */
     private fun startVos(ctx: Context) {
